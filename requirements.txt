@@ -1,2 +1,2 @@
-pip install --upgrade pep8
-pip intall --upgrade autopep8
+pep8
+autopep8

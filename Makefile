@@ -5,5 +5,5 @@ lint:
 lint-disp:
 	autopep8 -r -d .
 lint-fix:
-	autopep8 -i -r -d .
+	autopep8 -i -r -a .
 
