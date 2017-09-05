@@ -18,18 +18,19 @@ Pieter Abbeel (pabbeel@cs.berkeley.edu).
 """
 
 import time
-try: 
+try:
     import pacman
-except:
+except BaseException:
     pass
 
 DRAW_EVERY = 1
-SLEEP_TIME = 0 # This can be overwritten by __init__
+SLEEP_TIME = 0  # This can be overwritten by __init__
 DISPLAY_MOVES = False
-QUIET = False # Supresses output
+QUIET = False  # Supresses output
+
 
 class NullGraphics:
-    def initialize(self, state, is_blue = False):
+    def initialize(self, state, is_blue=False):
         pass
 
     def update(self, state):
@@ -50,13 +51,14 @@ class NullGraphics:
     def finish(self):
         pass
 
+
 class PacmanGraphics:
     def __init__(self, speed=None):
-        if speed != None:
+        if speed is not None:
             global SLEEP_TIME
             SLEEP_TIME = speed
 
-    def initialize(self, state, is_blue = False):
+    def initialize(self, state, is_blue=False):
         self.draw(state)
         self.pause()
         self.turn = 0
@@ -71,9 +73,9 @@ class PacmanGraphics:
                 ghosts = [pacman.nearest_point(state.get_ghost_position(i))
                           for i in range(1, num_agents)]
                 print "%4d) P: %-8s" % (
-                    self.turn, 
+                    self.turn,
                     str(pacman.nearest_point(state.get_pacman_position()))),\
-                    '| Score: %-5d' % state.score,'| Ghosts:', ghosts
+                    '| Score: %-5d' % state.score, '| Ghosts:', ghosts
             if self.turn % DRAW_EVERY == 0:
                 self.draw(state)
                 self.pause()

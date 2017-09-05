@@ -18,11 +18,12 @@ Pieter Abbeel (pabbeel@cs.berkeley.edu).
 """
 
 
-
 import sys
 import inspect
-import heapq, random
+import heapq
+import random
 import cStringIO
+
 
 def raise_not_defined():
     file_name = inspect.stack()[1][1]
@@ -32,6 +33,7 @@ def raise_not_defined():
     print "*** Method not implemented: %s at line %s of %s" % (method, line, file_name)
     sys.exit(1)
 
+
 def lookup(name, namespace):
     """
     Get a method or class from any imported module from its name.
@@ -39,16 +41,23 @@ def lookup(name, namespace):
     """
     dots = name.count('.')
     if dots > 0:
-        module_name, obj_name = '.'.join(name.split('.')[:-1]), name.split('.')[-1]
+        module_name, obj_name = '.'.join(
+            name.split('.')[:-1]), name.split('.')[-1]
         module = __import__(module_name)
         return getattr(module, obj_name)
     else:
-        modules = [obj for obj in namespace.values() if str(type(obj)) == "<type 'module'>"]
-        options = [getattr(module, name) for module in modules if name in dir(module)]
-        options += [obj[1] for obj in namespace.items() if obj[0] == name ]
-        if len(options) == 1: return options[0]
-        if len(options) > 1: raise Exception, 'Name conflict for %s'
-        raise Exception, '%s not found as a method or class' % name
+        modules = [
+            obj for obj in namespace.values() if str(
+                type(obj)) == "<type 'module'>"]
+        options = [getattr(module, name)
+                   for module in modules if name in dir(module)]
+        options += [obj[1] for obj in namespace.items() if obj[0] == name]
+        if len(options) == 1:
+            return options[0]
+        if len(options) > 1:
+            raise Exception('Name conflict for %s')
+        raise Exception('%s not found as a method or class' % name)
+
 
 def pause():
     """
@@ -68,6 +77,8 @@ def pause():
 #
 import signal
 import time
+
+
 class TimeoutFunctionException(Exception):
     """Exception to raise on a timeout"""
     pass
@@ -102,14 +113,15 @@ class TimeoutFunction:
         return result
 
 
-
 _ORIGINAL_STDOUT = None
 _ORIGINAL_STDERR = None
 _MUTED = False
 
+
 class WritableNull:
     def write(self, string):
         pass
+
 
 def mute_print():
     global _ORIGINAL_STDOUT, _ORIGINAL_STDERR, _MUTED
@@ -122,6 +134,7 @@ def mute_print():
     sys.stdout = WritableNull()
     #sys.stderr = WritableNull()
 
+
 def unmute_print():
     global _ORIGINAL_STDOUT, _ORIGINAL_STDERR, _MUTED
     if not _MUTED:
@@ -130,4 +143,3 @@ def unmute_print():
 
     sys.stdout = _ORIGINAL_STDOUT
     #sys.stderr = _ORIGINAL_STDERR
-

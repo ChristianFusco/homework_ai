@@ -56,13 +56,13 @@ class FruitShop:
         """
             order_list: List of (fruit, num_pounds) tuples
 
-        Returns cost of order_list, assuming all fruit 
+        Returns cost of order_list, assuming all fruit
         are in our inventory or None otherwise
         """
 
         total_cost = 0
         for fruit, pounds in order_list:
-            if not fruit in self.fruit_prices:
+            if fruit not in self.fruit_prices:
                 return None
             total_cost += self.get_cost_per_pound(fruit) * pounds
         return total_cost
@@ -76,12 +76,13 @@ class FruitShop:
     def __repr__(self):
         return str(self)
 
+
 if __name__ == '__main__':
     """This code runs when you invoke the script from the command line"""
-    fruit_prices = {'apples':2.00, 'oranges': 1.50, 'pears': 1.75,
-                    'limes':0.75, 'strawberries':1.00}
+    fruit_prices = {'apples': 2.00, 'oranges': 1.50, 'pears': 1.75,
+                    'limes': 0.75, 'strawberries': 1.00}
 
     fruitShop = FruitShop('TestShop', fruit_prices)
 
-    order_list = [ ('apples', 2.0), ('pears', 3.0), ('limes', 4.0) ]
+    order_list = [('apples', 2.0), ('pears', 3.0), ('limes', 4.0)]
     print 'Cost of', order_list, 'is', fruitShop.get_price_of_order(order_list)

@@ -24,11 +24,10 @@ import re
 import sys
 
 
-
 class Question(object):
-    """Class which models a question in a project.  
+    """Class which models a question in a project.
 
-    Note that questions have a maximum number of points they are worth, 
+    Note that questions have a maximum number of points they are worth,
     and are composed of a series of test cases
 
     """
@@ -57,10 +56,12 @@ class Question(object):
         self.raise_not_defined()
 
 # Question in which all test cases must be passed in order to receive credit
+
+
 class PassAllTestsQuestion(Question):
 
     def execute(self, grades):
-        # TODO: is this the right way to use grades?  
+        # TODO: is this the right way to use grades?
         # The autograder doesn't seem to use it.
         tests_failed = False
         grades.assign_zero_credit()
@@ -72,13 +73,14 @@ class PassAllTestsQuestion(Question):
         else:
             grades.assign_full_credit()
 
+
 class ExtraCreditPassAllTestsQuestion(Question):
     def __init__(self, question_dict, display):
         Question.__init__(self, question_dict, display)
         self.extra_points = int(question_dict['extra_points'])
 
     def execute(self, grades):
-        # TODO: is this the right way to use grades?  
+        # TODO: is this the right way to use grades?
         # The autograder doesn't seem to use it.
         tests_failed = False
         grades.assign_zero_credit()
@@ -94,7 +96,7 @@ class ExtraCreditPassAllTestsQuestion(Question):
 
 class HackedPartialCreditQuestion(Question):
     """Question in which predict credit is given for test cases with a ``points'' property.
-    
+
     All other tests are mandatory and must be passed.
 
     """
@@ -109,11 +111,12 @@ class HackedPartialCreditQuestion(Question):
         for test_case, f in self.test_cases:
             test_result = f(grades)
             if "points" in test_case.test_dict:
-                if test_result: points += float(test_case.test_dict["points"])
+                if test_result:
+                    points += float(test_case.test_dict["points"])
             else:
                 passed = passed and test_result
 
-        ## FIXME: Below terrible hack to match q3's logic
+        # FIXME: Below terrible hack to match q3's logic
         if int(points) == self.max_points and not passed:
             grades.assign_zero_credit()
         else:
@@ -133,6 +136,7 @@ class Q6PartialCreditQuestion(Question):
         if False in results:
             grades.assign_zero_credit()
 
+
 class PartialCreditQuestion(Question):
     """Fails any test which returns False, otherwise doesn't effect the grades object.
     Partial credit tests will add the required points."""
@@ -147,16 +151,11 @@ class PartialCreditQuestion(Question):
                 return False
 
 
-
 class NumberPassedQuestion(Question):
     """Grade is the number of test cases passed."""
 
     def execute(self, grades):
         grades.add_points([f(grades) for _, f in self.test_cases].count(True))
-
-
-
-
 
 
 class TestCase(object):
@@ -210,9 +209,9 @@ class TestCase(object):
         extra_credit = max(0, points - max_points)
         regular_credit = points - extra_credit
 
-        grades.add_message('%s: %s (%s of %s points)' % 
-                            ("PASS" if points >= max_points else "FAIL", 
-                             self.path, regular_credit, max_points))
+        grades.add_message('%s: %s (%s of %s points)' %
+                           ("PASS" if points >= max_points else "FAIL",
+                            self.path, regular_credit, max_points))
         if extra_credit > 0:
             grades.add_message('EXTRA CREDIT: %s points' % (extra_credit,))
 
@@ -223,4 +222,3 @@ class TestCase(object):
 
     def add_message(self, message):
         self.messages.extend(message.split('\n'))
-

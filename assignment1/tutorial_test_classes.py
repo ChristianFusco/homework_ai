@@ -22,13 +22,15 @@ import test_classes
 # Simple test case which evals an arbitrary piece of python code.
 # The test is correct if the output of the code given the student's
 # solution matches that of the instructor's.
+
+
 class EvalTest(test_classes.TestCase):
 
     def __init__(self, question, test_dict):
         super(EvalTest, self).__init__(question, test_dict)
-        self.preamble = compile(test_dict.get('preamble', ""), 
+        self.preamble = compile(test_dict.get('preamble', ""),
                                 "%s.preamble" % self.get_path(), 'exec')
-        self.test = compile(test_dict['test'], "%s.test" % self.get_path(), 
+        self.test = compile(test_dict['test'], "%s.test" % self.get_path(),
                             'eval')
         self.success = test_dict['success']
         self.failure = test_dict['failure']
@@ -48,8 +50,8 @@ class EvalTest(test_classes.TestCase):
             grades.add_message('FAIL: %s' % self.path)
             grades.add_message('\t%s' % self.failure)
             grades.add_message('\tstudent result: "%s"' % result)
-            grades.add_message('\tcorrect result: "%s"' % 
-                                solution_dict['result'])
+            grades.add_message('\tcorrect result: "%s"' %
+                               solution_dict['result'])
 
         return False
 
@@ -62,4 +64,3 @@ class EvalTest(test_classes.TestCase):
         handle.write('result: "%s"\n' % self.eval_code(module_dict))
         handle.close()
         return True
-

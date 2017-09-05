@@ -27,27 +27,29 @@ Pieter Abbeel (pabbeel@cs.berkeley.edu).
 import shop
 import sys
 
+
 def shop_smart(order_list, fruit_shops):
     """
         order_list: List of (fruit, num_pound) tuples
         fruit_shops: List of FruitShops
     """
-    
+
     best_shop = {'shop': None, 'price': sys.maxsize}
     for fruit_shop in fruit_shops:
-      price = fruit_shop.get_price_of_order(order_list)
-      if price < best_shop['price']:
-        best_shop = {'shop': fruit_shop, 'price': price}
+        price = fruit_shop.get_price_of_order(order_list)
+        if price < best_shop['price']:
+            best_shop = {'shop': fruit_shop, 'price': price}
     return best_shop['shop']
 
+
 if __name__ == '__main__':
-  "This code runs when you invoke the script from the command line"
-  orders = [('apples',1.0), ('oranges',3.0)]
-  dir1 = {'apples': 2.0, 'oranges':1.0}
-  shop1 =  shop.FruitShop('shop1',dir1)
-  dir2 = {'apples': 1.0, 'oranges': 5.0}
-  shop2 = shop.FruitShop('shop2',dir2)
-  shops = [shop1, shop2]
-  print "For orders ", orders, ", the best shop is", shop_smart(orders, shops).get_name()
-  orders = [('apples',3.0)]
-  print "For orders: ", orders, ", the best shop is", shop_smart(orders, shops).get_name()
+    "This code runs when you invoke the script from the command line"
+    orders = [('apples', 1.0), ('oranges', 3.0)]
+    dir1 = {'apples': 2.0, 'oranges': 1.0}
+    shop1 = shop.FruitShop('shop1', dir1)
+    dir2 = {'apples': 1.0, 'oranges': 5.0}
+    shop2 = shop.FruitShop('shop2', dir2)
+    shops = [shop1, shop2]
+    print "For orders ", orders, ", the best shop is", shop_smart(orders, shops).get_name()
+    orders = [('apples', 3.0)]
+    print "For orders: ", orders, ", the best shop is", shop_smart(orders, shops).get_name()

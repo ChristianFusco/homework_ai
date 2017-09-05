@@ -21,6 +21,7 @@ Pieter Abbeel (pabbeel@cs.berkeley.edu).
 import re
 import sys
 
+
 class TestParser(object):
 
     def __init__(self, path):
@@ -50,7 +51,7 @@ class TestParser(object):
         test['__emit__'] = []
         lines = test_text.split('\n')
         i = 0
-        
+
         # read a property in each loop cycle
         while(i < len(lines)):
             # skip blank lines

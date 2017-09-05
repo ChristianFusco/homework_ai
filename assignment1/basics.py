@@ -19,17 +19,17 @@ Student side autograding was added by Brad Miller, Nick Hay, and
 Pieter Abbeel (pabbeel@cs.berkeley.edu).
 """
 
+
 def add(a, b):
     """Return the sum of a and b"""
     return a + b
+
 
 def comprehension(lst):
     """
         lst: List of strings
 
     Returns a list containing an uppercased version of each string in lst
-    that has length greater than five. 
+    that has length greater than five.
     """
     return [value.upper() for value in lst if len(value) > 5]
-
-    
