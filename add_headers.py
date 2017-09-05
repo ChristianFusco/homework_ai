@@ -20,7 +20,8 @@ import re
 import os
 
 rootdir = '.'
-replacements = ('LAB_OR_PA_NUMBER',
+replacements = ('NAME',
+				'LAB_OR_PA_NUMBER',
 				'DATE_ASSIGNED',
 				'DUE_DATE',
 				'DESCRIPTION')
@@ -29,8 +30,7 @@ authenticity_text = open('authenticity.txt').read()
 def file_updated(path):
 	# Compare the first line of each file to see if there's a diff
 	python_text = open(path).readline()
-	authenticity_text = open('authenticity.txt').readline()
-	return python_text == authenticity_text
+	return '# Author' in python_text
 
 def update_file(path, addition):
 	# Adds the addition to the beginning of the file at path

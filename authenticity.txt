@@ -1,4 +1,4 @@
-# Author: Christian Fusco
+# Author: NAME
 # Class: CSI-480-01/02
 # Assignment: LAB_OR_PA_NUMBER
 # Date Assigned: DATE_ASSIGNED
