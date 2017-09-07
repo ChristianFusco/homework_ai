@@ -1,6 +1,10 @@
 Workspace for Josh's AI class.
 
 Usage:
+### Make zip
+
+Zips files that don't have the same last modified timestamp as the least recently modified file.  Also adds headers ontop of all files.
+
 ### Make init
 
 Installs packages like pep8 and autopep8.
