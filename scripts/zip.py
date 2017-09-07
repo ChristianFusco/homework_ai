@@ -13,7 +13,7 @@ def main():
             break
     # Update headers since file finding is based on last modified
     # TODO: Make add_headers a module
-    os.system('python add_headers.py')
+    os.system('python scripts/add_headers.py')
 
     files_to_zip = [os.path.join(search_dir, file) for file in files_to_zip]
     with ZipFile(search_dir + '.zip','w') as zip:
