@@ -10,4 +10,5 @@ header:
 	python add_headers.py
 clean:
 	rm -r *.pyc
-
+zip:
+	python zip.py
