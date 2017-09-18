@@ -24,7 +24,7 @@ rootdir = '.'
 replacements = ('NAME',
                 'LAB_OR_PA_NUMBER',
                 'DATE_ASSIGNED',
-                'DUE_DATE',
+                 'DUE_DATE',
                 'DESCRIPTION')
 authenticity_text = open('authenticity.txt').read()
 
