@@ -7,10 +7,10 @@ Due Date: 9/11/201
 Description:
 A short python practice assignment.
 
-Certification of Authenticity: 
-I certify that this is entirely my own work, except where I have given 
-fully-documented references to the work of others. I understand the definition 
-and consequences of plagiarism and acknowledge that the assessor of this 
+Certification of Authenticity:
+I certify that this is entirely my own work, except where I have given
+fully-documented references to the work of others. I understand the definition
+and consequences of plagiarism and acknowledge that the assessor of this
 assignment may, for the purpose of assessing this assignment:
 - Reproduce this assignment and provide a copy to another member of academic
 - staff; and/or Communicate a copy of this assignment to a plagiarism checking
@@ -24,8 +24,7 @@ rootdir = '.'
 replacements = ('NAME',
                 'LAB_OR_PA_NUMBER',
                 'DATE_ASSIGNED',
-                 'DUE_DATE',
-                'DESCRIPTION')
+                'DUE_DATE')
 authenticity_text = open('authenticity.txt').read()
 
 
@@ -54,11 +53,13 @@ for subdir, dirs, files in os.walk(rootdir):
         continue
     for file in files:
         path = os.path.join(subdir, file)
-        if '.py' not in file:
+        if '.py' != file[-3:]:
             continue
         if 'zip.py' == file or 'add_headers' == file:
-        	continue
+            continue
         if file_updated(path):
             continue
-        update_file(path, authenticity_text)
+        description = raw_input('File is ' + path + '.  Enter description:')
+        tmp = re.sub('DESCRIPTION', description, authenticity_text)        
+        update_file(path, tmp)
         print('Wrote to ' + path)

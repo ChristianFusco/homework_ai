@@ -1,0 +1,7 @@
+class: "EvalTest"
+success: "comprehension(lst) returns an uppercased version of each string in lst that has length greater than five"
+failure: "comprehension(lst) must return an uppercased version of each string in lst that has length greater than five"
+
+# A python expression to be evaluated.  This expression must return the 
+# same result for the student and instructor's code.
+test: "basics.comprehension(['cool'])"
